@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.msha.goal.databinding.FragmentHabbitDetailsFragmentBinding
 import java.util.Locale
 
-/**
- * An example full-screen fragment that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
 class HabitDetailsFragment : Fragment() {
 
     private var _binding: FragmentHabbitDetailsFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var currentGoal: Goal
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,13 +22,28 @@ class HabitDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHabbitDetailsFragmentBinding.inflate(inflater, container, false)
-
-        val goal = Goal("Run", target = 12.0, progress = 7.0)
-
+        val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
 
-        val template = String.format(Locale.getDefault(),"%f of %f", goal.progress, goal.target)
-        binding.currentGoalText.text = template
+
+
+        vm.habitList.observe(viewLifecycleOwner, Observer {
+            val list = it
+
+            vm.currentGoal.observe(viewLifecycleOwner, Observer {
+                currentGoal = list.first { goal ->
+                    goal.name == it
+                }
+                val template = String.format(Locale.getDefault(),"%.2f of %.2f", currentGoal.progress, currentGoal.target)
+                binding.currentGoalText.text = template
+                binding.progressBar.progress = currentGoal.progress.toInt()
+                binding.progressBar.max = currentGoal.target.toInt()
+            })
+        })
+        binding.addEasurement.setOnClickListener {
+            currentGoal.addProgress(10.0)
+        }
+
 
         return binding.root
 

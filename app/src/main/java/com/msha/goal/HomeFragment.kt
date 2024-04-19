@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater,container, false)
         val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         val adapter = RecyclerAdapter() {
+            vm.currentGoal.postValue(it.name)
             findNavController().navigate(R.id.action_homeFragment_to_habitDetailsFragment)
         }
 

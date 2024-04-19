@@ -5,8 +5,23 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
     val habitList: MutableLiveData<List<Goal>> by lazy{
-        MutableLiveData<List<Goal>>(mutableListOf())
+        MutableLiveData<List<Goal>>(listOf())
     }
+
+    val currentGoal : MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
+//    fun addProgress (progress : Double){
+//        val goal = habitList.value?.first{
+//            it.name == currentGoal.value
+//        }!!
+//        val newProgress = goal.progress.plus(progress)
+//        val updatedGoal = goal.copy(
+//            progress = newProgress
+//        )
+//        habitList.postValue(updatedGoal)
+//    }
 
     fun addHabit(name : String, target: Double){
         val goal = Goal(name,target = target)
