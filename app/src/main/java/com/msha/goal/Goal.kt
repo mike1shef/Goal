@@ -6,7 +6,6 @@ data class Goal (
     var progress : Double = 0.0,
     var target: Double,
     var isCompleted : Boolean = false,
-    var isSelected: Boolean = false
 ){
 
     fun addProgress (double: Double){

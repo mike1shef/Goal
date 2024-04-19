@@ -1,7 +1,6 @@
 package com.msha.goal
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(private val context: Context)
+class RecyclerAdapter(val onClick : (goal : Goal) -> Unit)
     : ListAdapter<Goal, RecyclerAdapter.GoalViewHolder>(GoalDiffUtilCallback()) {
 
 
@@ -22,11 +21,7 @@ class RecyclerAdapter(private val context: Context)
         holder.itemView.setOnClickListener {
             if (holder.adapterPosition != RecyclerView.NO_POSITION){
                 val item = getItem(holder.adapterPosition)
-                item.isSelected = !item.isSelected
-
-                if (item.isSelected){
-                    holder.itemView.setBackgroundColor(Color.GRAY)
-                }
+                onClick(item)
             }
         }
 
@@ -41,11 +36,6 @@ class RecyclerAdapter(private val context: Context)
             this.min = 0
 
             this.progress = item.progress.toInt()
-        }
-        if (item.isSelected) {
-            holder.itemView.setBackgroundColor(Color.GRAY)
-        } else {
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT)
         }
     }
 
