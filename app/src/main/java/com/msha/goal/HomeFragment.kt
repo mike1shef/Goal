@@ -38,6 +38,10 @@ class HomeFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        binding.addGoal.setOnClickListener {
+            AddGoalFragment().show(requireActivity().supportFragmentManager, "Add goal")
+        }
+
         return binding.root
 
     }

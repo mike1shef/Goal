@@ -15,6 +15,7 @@ class HabitDetailsFragment : Fragment() {
     private var _binding: FragmentHabbitDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var currentGoal: Goal
+    private var isPercentageView = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,9 +24,6 @@ class HabitDetailsFragment : Fragment() {
     ): View {
         _binding = FragmentHabbitDetailsFragmentBinding.inflate(inflater, container, false)
         val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-
-
 
         vm.habitList.observe(viewLifecycleOwner, Observer {
             val list = it
@@ -38,6 +36,11 @@ class HabitDetailsFragment : Fragment() {
                 binding.currentGoalText.text = template
                 binding.progressBar.progress = currentGoal.progress.toInt()
                 binding.progressBar.max = currentGoal.target.toInt()
+
+                binding.currentGoalText.setOnClickListener {
+                    binding.currentGoalText.text = changeView(currentGoal.progress, currentGoal.target)
+                }
+
             })
         })
         binding.addEasurement.setOnClickListener {
@@ -49,6 +52,11 @@ class HabitDetailsFragment : Fragment() {
 
     }
 
+    private fun changeView (progress: Double, target:Double) : String {
+        isPercentageView = !isPercentageView
+        return if (isPercentageView) { "${((progress / target)*100).toInt()} %" }
+        else { String.format(Locale.getDefault(),"%.2f of %.2f", progress, target) }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

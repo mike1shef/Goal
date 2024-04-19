@@ -29,9 +29,5 @@ class MainActivity : AppCompatActivity() {
         val builder = AppBarConfiguration.Builder(navController.graph)
         val appBarConfiguration = builder.build()
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-
-        binding.floatingButton.setOnClickListener {
-            AddGoalFragment().show(supportFragmentManager, "Add goal")
-        }
     }
 }
