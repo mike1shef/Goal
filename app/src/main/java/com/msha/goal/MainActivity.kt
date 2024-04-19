@@ -2,19 +2,25 @@ package com.msha.goal
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.msha.goal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
         setSupportActionBar(binding.toolbar)
         setContentView(view)
 
@@ -24,9 +30,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = builder.build()
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-
         binding.floatingButton.setOnClickListener {
-            Toast.makeText(this, "Enter number", Toast.LENGTH_SHORT).show()
+            AddGoalFragment().show(supportFragmentManager, "Add goal")
         }
     }
 }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.msha.goal.HomeFragment"
-        android:label="fragment_home"
+        android:label="Goal"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_habitDetailsFragment"
@@ -17,6 +17,11 @@
     <fragment
         android:id="@+id/habitDetailsFragment"
         android:name="com.msha.goal.HabitDetailsFragment"
-        android:label="fragment_habbit_details_fragment"
+        android:label="Details"
         tools:layout="@layout/fragment_habbit_details_fragment" />
+    <dialog
+        android:id="@+id/addGoalFragment"
+        android:name="com.msha.goal.AddGoalFragment"
+        android:label="fragment_add_goal"
+        tools:layout="@layout/fragment_add_goal" />
 </navigation>
