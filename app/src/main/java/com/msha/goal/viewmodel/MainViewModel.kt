@@ -1,13 +1,19 @@
 package com.msha.goal.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.msha.goal.model.Goal
+import com.msha.goal.model.Measurement
+import com.msha.goal.repository.GoalRepository
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
-    val habitList: MutableLiveData<List<Goal>> by lazy{
-        MutableLiveData<List<Goal>>(listOf())
-    }
+class MainViewModel (private val repository: GoalRepository) : ViewModel() {
+
+    val habitList : LiveData<List<Goal>> = repository.allGoals.asLiveData()
 
     val currentGoal : MutableLiveData<String> by lazy {
         MutableLiveData<String>()
@@ -25,14 +31,22 @@ class MainViewModel : ViewModel() {
 //    }
 
     fun addHabit(name : String, target: Double){
-        val goal = Goal(name,target = target)
-        val updatedList = habitList.value?.toMutableList()
-        updatedList?.add(goal)
-        habitList.value = updatedList
-    }
-    fun getGoalByName(name: String): Goal? {
-        return  habitList.value?.find {
-            it.name == name
+        viewModelScope.launch {
+            repository.insertGoal(Goal(name = name, target = target))
         }
+    }
+//    fun addProgress (progress: Double) {
+//
+//        val measurement = Measurement(progress = progress)
+//    }
+}
+
+class MainViewModelFactory(private val repository: GoalRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MainViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

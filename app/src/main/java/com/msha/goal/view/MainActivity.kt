@@ -9,6 +9,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.msha.goal.viewmodel.MainViewModel
 import com.msha.goal.R
 import com.msha.goal.databinding.ActivityMainBinding
+import com.msha.goal.model.Goal
+import com.msha.goal.model.GoalDao
+import com.msha.goal.model.GoalDatabase
+import com.msha.goal.repository.GoalRepository
+import com.msha.goal.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,7 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        val application = requireNotNull(this).application
+        val dao : GoalDao = GoalDatabase.getInstance(application).goalDao
+        val repository = GoalRepository(dao)
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         setSupportActionBar(binding.toolbar)
         setContentView(view)
