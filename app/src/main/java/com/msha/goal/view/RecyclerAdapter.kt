@@ -1,7 +1,5 @@
-package com.msha.goal
+package com.msha.goal.view
 
-import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.msha.goal.model.Goal
+import com.msha.goal.R
 
 class RecyclerAdapter(val onClick : (goal : Goal) -> Unit)
     : ListAdapter<Goal, RecyclerAdapter.GoalViewHolder>(GoalDiffUtilCallback()) {

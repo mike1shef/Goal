@@ -1,4 +1,4 @@
-package com.msha.goal
+package com.msha.goal.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.msha.goal.viewmodel.MainViewModel
 import com.msha.goal.databinding.FragmentAddGoalBinding
 
 class AddGoalFragment : BottomSheetDialogFragment() {

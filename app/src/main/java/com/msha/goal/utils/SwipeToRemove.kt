@@ -1,4 +1,4 @@
-package com.msha.goal
+package com.msha.goal.utils
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

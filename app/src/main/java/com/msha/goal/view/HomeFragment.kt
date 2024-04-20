@@ -1,4 +1,4 @@
-package com.msha.goal
+package com.msha.goal.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.msha.goal.databinding.FragmentHabbitDetailsFragmentBinding
+import com.msha.goal.viewmodel.MainViewModel
+import com.msha.goal.R
 import com.msha.goal.databinding.FragmentHomeBinding
 
 
@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater,container, false)
         val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         val adapter = RecyclerAdapter() {
-            vm.currentGoal.postValue(it.name)
+            vm.currentGoal.value = it.name
             findNavController().navigate(R.id.action_homeFragment_to_habitDetailsFragment)
         }
 

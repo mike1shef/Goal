@@ -1,7 +1,8 @@
-package com.msha.goal
+package com.msha.goal.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.msha.goal.model.Goal
 
 class MainViewModel : ViewModel() {
     val habitList: MutableLiveData<List<Goal>> by lazy{

@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="32dp"
     android:orientation="vertical"
-    tools:context=".AddGoalFragment">
+    tools:context=".view.AddGoalFragment">
 
     <TextView
         android:layout_width="match_parent"

@@ -1,14 +1,13 @@
-package com.msha.goal
+package com.msha.goal.view
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.msha.goal.viewmodel.MainViewModel
+import com.msha.goal.R
 import com.msha.goal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
