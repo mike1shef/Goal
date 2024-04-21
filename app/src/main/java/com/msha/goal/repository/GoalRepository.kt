@@ -20,4 +20,9 @@ class GoalRepository (private val goalDao: GoalDao) {
         goalDao.insertMeasurement(measurement)
     }
 
+    @WorkerThread
+    suspend fun addMeasurement (goal: Goal, measurement: Measurement){
+        goalDao.addMeasurement(goal, measurement)
+    }
+
 }

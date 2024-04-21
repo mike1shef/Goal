@@ -16,7 +16,6 @@ class HabitDetailsFragment : Fragment() {
 
     private var _binding: FragmentHabbitDetailsFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var currentGoal: Goal
     private var isPercentageView = false
 
     override fun onCreateView(
@@ -27,36 +26,25 @@ class HabitDetailsFragment : Fragment() {
         _binding = FragmentHabbitDetailsFragmentBinding.inflate(inflater, container, false)
         val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-        vm.habitList.observe(viewLifecycleOwner, Observer {
-            val list = it
-
-            vm.currentGoal.observe(viewLifecycleOwner, Observer {
-                currentGoal = list.first { goal ->
-                    goal.name == it
-                }
-                val template = String.format(Locale.getDefault(),"%.2f of %.2f", currentGoal.progress, currentGoal.target)
-                binding.currentGoalText.text = template
-                binding.progressBar.progress = currentGoal.progress.toInt()
-                binding.progressBar.max = currentGoal.target.toInt()
-
-                binding.currentGoalText.setOnClickListener {
-                    binding.currentGoalText.text = changeView(currentGoal.progress, currentGoal.target)
-                }
-
-            })
-        })
-        binding.addEasurement.setOnClickListener {
-            currentGoal.addProgress(10.0)
-
+        vm.selectedHabit.observe(viewLifecycleOwner, Observer {currentGoal ->
             val template = String.format(Locale.getDefault(),"%.2f of %.2f", currentGoal.progress, currentGoal.target)
             binding.currentGoalText.text = template
             binding.progressBar.progress = currentGoal.progress.toInt()
-        }
+            binding.progressBar.max = currentGoal.target.toInt()
 
+            binding.currentGoalText.setOnClickListener {
+                binding.currentGoalText.text = changeView(currentGoal.progress, currentGoal.target)
+            }
+        })
+
+        binding.addMeasurement.setOnClickListener {
+            AddMeasurementFragment().show(requireActivity().supportFragmentManager, "Add measurement")
+        }
 
         return binding.root
 
     }
+
 
     private fun changeView (progress: Double, target:Double) : String {
         isPercentageView = !isPercentageView

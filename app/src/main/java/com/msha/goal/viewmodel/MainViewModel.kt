@@ -15,8 +15,11 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
 
     val habitList : LiveData<List<Goal>> = repository.allGoals.asLiveData()
 
-    val currentGoal : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    private val mutableSelectedHabit : MutableLiveData<Goal>  =  MutableLiveData<Goal>()
+    val selectedHabit : MutableLiveData<Goal> get() = mutableSelectedHabit
+
+    fun selectHabit (goal: Goal){
+        mutableSelectedHabit.value = goal
     }
 
 //    fun addProgress (progress : Double){
@@ -35,10 +38,15 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
             repository.insertGoal(Goal(name = name, target = target))
         }
     }
-//    fun addProgress (progress: Double) {
-//
-//        val measurement = Measurement(progress = progress)
-//    }
+    fun addProgress (progress: Double) {
+        viewModelScope.launch {
+            val goal = habitList.value?.find { it == selectedHabit.value }!!
+            goal.progress += progress
+            val measurement = Measurement(gid = goal.gid, progress = progress)
+            repository.addMeasurement(goal, measurement)
+            selectedHabit.value = goal
+        }
+    }
 }
 
 class MainViewModelFactory(private val repository: GoalRepository) : ViewModelProvider.Factory {
