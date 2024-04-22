@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.msha.goal.view.HomeFragment"
+        android:label="Goal"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_habitDetailsFragment"
+            app:destination="@id/habitDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/habitDetailsFragment"
+        android:name="com.msha.goal.view.HabitDetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_habbit_details_fragment" />
+    <dialog
+        android:id="@+id/addGoalFragment"
+        android:name="com.msha.goal.view.AddGoalFragment"
+        android:label="fragment_add_goal"
+        tools:layout="@layout/fragment_add_goal" />
+</navigation>

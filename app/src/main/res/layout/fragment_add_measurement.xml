@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/MaterialAlertDialog.Material3"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="32dp"
+    android:orientation="vertical"
+    tools:context=".view.AddGoalFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New measurement"
+        style="@style/MaterialAlertDialog.Material3.Title.Text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="12dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:layout_height="0dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_measurement_value"
+            android:layout_gravity="center"
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            app:endIconMode="clear_text"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:textSize="26sp"
+                android:gravity="center"
+                android:hint="km" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:layout_height="0dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_measurement_button"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Add measurement"/>
+
+</LinearLayout>
