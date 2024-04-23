@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.msha.goal.viewmodel.MainViewModel
 import com.msha.goal.databinding.FragmentAddGoalBinding
@@ -15,13 +15,12 @@ import com.msha.goal.databinding.FragmentAddGoalBinding
 class AddGoalFragment : BottomSheetDialogFragment() {
     private var _binding : FragmentAddGoalBinding? = null
     private val binding get() = _binding!!
+    private val vm : MainViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddGoalBinding.inflate(inflater,container, false)
-        val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
         val goalNameText = binding.editGoalName.editText
         val goalNumberText = binding.editTargetValue.editText
         val saveButton = binding.saveButton.apply {

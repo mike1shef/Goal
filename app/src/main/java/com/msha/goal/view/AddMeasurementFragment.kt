@@ -9,23 +9,21 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.msha.goal.R
-import com.msha.goal.databinding.FragmentAddGoalBinding
 import com.msha.goal.databinding.FragmentAddMeasurementBinding
 import com.msha.goal.viewmodel.MainViewModel
 
 class AddMeasurementFragment : BottomSheetDialogFragment() {
     private var _binding : FragmentAddMeasurementBinding? = null
     private val binding get() = _binding!!
+    private val vm : MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddMeasurementBinding.inflate(inflater, container, false)
-        val vm = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         val measurementText = binding.addMeasurementValue.editText
         val addMeasurementButton = binding.addMeasurementButton

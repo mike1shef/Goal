@@ -25,4 +25,14 @@ class GoalRepository (private val goalDao: GoalDao) {
         goalDao.addMeasurement(goal, measurement)
     }
 
+    @WorkerThread
+    suspend fun getExactMeasurements (goal: Goal){
+        goalDao.getExactMeasurements(goal.gid)
+    }
+
+
+    suspend fun deleteGoal (goal: Goal) {
+        goalDao.deleteGoalwithMeasurements(goal)
+    }
+
 }

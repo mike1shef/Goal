@@ -1,6 +1,7 @@
 package com.msha.goal.model
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GoalDao {
 
-    @Query("SELECT * FROM goals ORDER BY goal_progress DESC")
+    @Query("SELECT * FROM goals ORDER BY (goal_progress/goal_target) DESC")
     fun getAllGoalsOrdered(): Flow<List<Goal>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -23,15 +24,35 @@ interface GoalDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update (goal: Goal)
 
+    @Delete
+    suspend fun deleteGoal(goal: Goal)
+    @Delete
+    suspend fun deleteMeasurement (measurement: Measurement)
+    @Query("DELETE FROM goals")
+    suspend fun deleteAllGoals()
+
+    @Query("DELETE FROM measurements")
+    suspend fun deleteAllMeasurements()
+
+    @Query("DELETE FROM measurements WHERE gid = :gid")
+    suspend fun deleteMeasurementOfConcreteUser (gid : Long,)
+
+
+@Transaction
+suspend fun deleteGoalwithMeasurements(goal: Goal) {
+    deleteMeasurementOfConcreteUser(goal.gid)
+    deleteGoal(goal)
+}
+
+
     @Transaction
     suspend fun addMeasurement (currentGoal: Goal, measurement: Measurement ) {
         update(currentGoal)
         insertMeasurement(measurement)
     }
 
-//    @Transaction
-//    @Query("SELECT * FROM measurements WHERE gid = :goalId ")
-//    suspend fun getGoalwithMeasurements(goalId : Long) : List<GoalWithMeasurements>
+    @Query("SELECT * FROM measurements WHERE gid = :gid")
+    suspend fun getExactMeasurements(gid : Long) : List<Measurement>
 
     @Query("DELETE FROM goals")
     suspend fun deleteAll()
