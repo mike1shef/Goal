@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -99,7 +100,7 @@ class AddMeasurementFragment : Fragment() {
         }
 
         closeButton.setOnClickListener {
-            findNavController().navigate(R.id.habitDetailsFragment)
+            binding.root.findNavController().popBackStack()
         }
 
         saveButton.setOnClickListener {
@@ -111,7 +112,7 @@ class AddMeasurementFragment : Fragment() {
             } else {
                 Toast.makeText(context, "Enter progress", Toast.LENGTH_SHORT).show()
             }
-            findNavController().navigate(R.id.habitDetailsFragment)
+            binding.root.findNavController().popBackStack()
         }
 
         return binding.root
