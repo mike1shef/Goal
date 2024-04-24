@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.msha.goal.model.Goal
 import com.msha.goal.model.Measurement
 import com.msha.goal.repository.GoalRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel (private val repository: GoalRepository) : ViewModel() {
@@ -22,29 +23,40 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         mutableSelectedHabit.value = goal
     }
 
-//    fun addProgress (progress : Double){
-//        val goal = habitList.value?.first{
-//            it.name == currentGoal.value
-//        }!!
-//        val newProgress = goal.progress.plus(progress)
-//        val updatedGoal = goal.copy(
-//            progress = newProgress
-//        )
-//        habitList.postValue(updatedGoal)
-//    }
-
     fun addHabit(name : String, target: Double){
         viewModelScope.launch {
             repository.insertGoal(Goal(name = name, target = target))
         }
     }
-    fun addProgress (progress: Double) {
+    fun addProgress (progress: Double, date: Long) {
+        val goal = habitList.value?.find { it == selectedHabit.value }!!
+        goal.progress += progress
+
+        if (goal.progress >= goal.target) {
+            goal.isCompleted = true
+        }
+
         viewModelScope.launch {
-            val goal = habitList.value?.find { it == selectedHabit.value }!!
-            goal.progress += progress
-            val measurement = Measurement(gid = goal.gid, progress = progress)
+            val measurement = Measurement(gid = goal.gid, progress = progress, date = date)
             repository.addMeasurement(goal, measurement)
-            selectedHabit.value = goal
+        }
+
+        selectedHabit.value = goal
+    }
+
+    fun getMeasurements (){
+        viewModelScope.launch {
+            repository.getExactMeasurements(selectedHabit.value!!)
+        }
+    }
+
+    fun deleteGoal (goal: Goal){
+        if (goal == mutableSelectedHabit.value){
+            mutableSelectedHabit.value = Goal(name = "", target = 0.0)
+        }
+
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteGoal(goal)
         }
     }
 }

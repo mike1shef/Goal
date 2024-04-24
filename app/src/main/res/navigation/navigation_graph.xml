@@ -18,10 +18,19 @@
         android:id="@+id/habitDetailsFragment"
         android:name="com.msha.goal.view.HabitDetailsFragment"
         android:label="Details"
-        tools:layout="@layout/fragment_habbit_details_fragment" />
+        tools:layout="@layout/fragment_habbit_details_fragment" >
+        <action
+            android:id="@+id/action_habitDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <dialog
         android:id="@+id/addGoalFragment"
         android:name="com.msha.goal.view.AddGoalFragment"
         android:label="fragment_add_goal"
         tools:layout="@layout/fragment_add_goal" />
+    <fragment
+        android:id="@+id/addMeasurementFragment"
+        android:name="com.msha.goal.view.AddMeasurementFragment"
+        android:label="fragment_add_measurement"
+        tools:layout="@layout/fragment_add_measurement" />
 </navigation>

@@ -16,23 +16,7 @@ data class Goal (
     var target: Double,
     @ColumnInfo("goal_isCompleted")
     var isCompleted : Boolean = false,
-){
-    fun addProgress (double: Double){
-        if (!this.isCompleted){
-            val tempResult = progress + double
-            if (tempResult >= this.target) {
-                this.progress = this.target
-                completeTheGoal()
-            } else {
-                this.progress += double
-            }
-        }
-    }
-
-    private fun completeTheGoal () {
-        this.isCompleted = true
-    }
-}
+)
 
 
 /** Added minimal class to get from DB only what needed.

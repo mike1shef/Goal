@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,12 @@ class RecyclerAdapter(val onClick : (goal : Goal) -> Unit)
             this.min = 0
 
             this.progress = item.progress.toInt()
+        }
+        if (item.isCompleted){
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.light_blue_A400
+            ))
         }
     }
 

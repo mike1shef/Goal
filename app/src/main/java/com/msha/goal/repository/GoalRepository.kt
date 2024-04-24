@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GoalRepository (private val goalDao: GoalDao) {
 
-    val allGoals : Flow<List<Goal>> = goalDao.getAllGoalsOrdered()
+    val allGoals : Flow<List<Goal>> = goalDao.getAllGoals()
 
     @WorkerThread
     suspend fun insertGoal (goal: Goal){
@@ -23,6 +23,16 @@ class GoalRepository (private val goalDao: GoalDao) {
     @WorkerThread
     suspend fun addMeasurement (goal: Goal, measurement: Measurement){
         goalDao.addMeasurement(goal, measurement)
+    }
+
+    @WorkerThread
+    suspend fun getExactMeasurements (goal: Goal){
+        goalDao.getExactMeasurements(goal.gid)
+    }
+
+
+    suspend fun deleteGoal (goal: Goal) {
+        goalDao.deleteGoalWithMeasurements(goal)
     }
 
 }
