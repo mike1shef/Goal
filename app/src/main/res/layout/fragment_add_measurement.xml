@@ -1,63 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/MaterialAlertDialog.Material3"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="32dp"
-    android:orientation="vertical"
-    tools:context=".view.AddGoalFragment">
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    tools:context=".view.AddMeasurementFragment">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_button"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textColor="@color/material_dynamic_primary0"
+        app:layout_constraintBottom_toBottomOf="@+id/close_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/close_button" />
+
+    <ImageButton
+        android:id="@+id/close_button"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/title"
+        style="@style/TextAppearance.Material3.HeadlineLarge"
+        android:textColor="@color/material_dynamic_primary0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New measurement"
-        style="@style/MaterialAlertDialog.Material3.Title.Text"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_margin="12dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content">
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="0.33"
-            android:layout_height="0dp"/>
+        android:text="Add measurement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/close_button" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_measurement_value"
-            android:layout_gravity="center"
-            android:layout_height="100dp"
-            android:layout_width="100dp"
-            app:endIconMode="clear_text"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/current_goal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="numberDecimal"
-                android:textSize="26sp"
-                android:gravity="center"
-                android:hint="km" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/current_goal_text"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="18dp"
+        android:layout_margin="12dp"
+        android:text="Goal"
+        android:textColor="@color/material_dynamic_primary0"
+        app:layout_constraintBottom_toTopOf="@id/divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="0.33"
-            android:layout_height="0dp"/>
+    <TextView
+        android:id="@+id/current_goal"
+        android:layout_margin="12dp"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:text="Cycling"
+        android:textColor="@color/material_dynamic_primary0"
+        app:layout_constraintBottom_toBottomOf="@+id/current_goal_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/current_goal_text"
+        app:layout_constraintTop_toTopOf="@+id/current_goal_text" />
 
-    </LinearLayout>
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/current_date_text"
+        app:layout_constraintTop_toBottomOf="@id/current_goal" />
+
+    <TextView
+        android:id="@+id/current_date_text"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:paddingVertical="8dp"
+        android:text="Date"
+        android:textColor="@color/material_dynamic_primary0"
+        app:layout_constraintBottom_toTopOf="@id/divider3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2" />
 
     <Button
-        android:id="@+id/add_measurement_button"
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:layout_width="match_parent"
+        android:id="@+id/current_date"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Add measurement"/>
+        android:paddingVertical="8dp"
+        android:text="Today"
+        android:textColor="@color/material_dynamic_primary0"
+        app:layout_constraintBottom_toBottomOf="@+id/current_date_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/current_date_text"
+        app:layout_constraintTop_toTopOf="@+id/current_date_text" />
 
-</LinearLayout>
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_box"
+        app:layout_constraintTop_toBottomOf="@id/current_date" />
+
+
+    <TextView
+        android:id="@+id/current_measurement"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:paddingVertical="8dp"
+        android:text="Distance"
+        android:textColor="@color/material_dynamic_primary0"
+        app:layout_constraintBottom_toTopOf="@+id/divider4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="90dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/material_dynamic_primary0"
+        app:boxBackgroundMode="none"
+        app:hintEnabled="false"
+        app:hintTextAppearance="@style/TextAppearance.Material3.LabelSmall"
+        app:layout_constraintBottom_toTopOf="@id/divider4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/current_measurement"
+        app:layout_constraintTop_toBottomOf="@id/divider3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Add km"
+            android:maxLines="1"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/material_dynamic_primary0"
+            app:suffixText="km"
+            tools:ignore="KeyboardInaccessibleWidget" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_box" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

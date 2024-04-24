@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.msha.goal.R
 import com.msha.goal.viewmodel.MainViewModel
 import com.msha.goal.databinding.FragmentHabbitDetailsFragmentBinding
 import java.util.Locale
@@ -41,11 +43,10 @@ class HabitDetailsFragment : Fragment() {
         })
 
         binding.addMeasurement.setOnClickListener {
-            AddMeasurementFragment().show(requireActivity().supportFragmentManager, "Add measurement")
+            findNavController().navigate(R.id.addMeasurementFragment)
         }
 
         return binding.root
-
     }
 
 

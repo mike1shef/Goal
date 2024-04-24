@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GoalDao {
 
-    @Query("SELECT * FROM goals ORDER BY (goal_progress/goal_target) DESC")
-    fun getAllGoalsOrdered(): Flow<List<Goal>>
+    @Query("SELECT * FROM goals")
+    fun getAllGoals(): Flow<List<Goal>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertGoal (goal: Goal)
@@ -35,11 +35,11 @@ interface GoalDao {
     suspend fun deleteAllMeasurements()
 
     @Query("DELETE FROM measurements WHERE gid = :gid")
-    suspend fun deleteMeasurementOfConcreteUser (gid : Long,)
+    suspend fun deleteMeasurementOfConcreteUser (gid : Long)
 
 
 @Transaction
-suspend fun deleteGoalwithMeasurements(goal: Goal) {
+suspend fun deleteGoalWithMeasurements(goal: Goal) {
     deleteMeasurementOfConcreteUser(goal.gid)
     deleteGoal(goal)
 }

@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         val application = requireNotNull(this).application
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         vm = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         setSupportActionBar(binding.toolbar)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

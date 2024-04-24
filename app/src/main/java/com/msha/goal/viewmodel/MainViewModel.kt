@@ -28,7 +28,7 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
             repository.insertGoal(Goal(name = name, target = target))
         }
     }
-    fun addProgress (progress: Double) {
+    fun addProgress (progress: Double, date: Long) {
         val goal = habitList.value?.find { it == selectedHabit.value }!!
         goal.progress += progress
 
@@ -37,7 +37,7 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         }
 
         viewModelScope.launch {
-            val measurement = Measurement(gid = goal.gid, progress = progress)
+            val measurement = Measurement(gid = goal.gid, progress = progress, date = date)
             repository.addMeasurement(goal, measurement)
         }
 

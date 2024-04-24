@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater,container, false)
-        val adapter = RecyclerAdapter() {
+        val adapter = RecyclerAdapter {
             vm.selectHabit(it)
             findNavController().navigate(R.id.action_homeFragment_to_habitDetailsFragment)
         }
@@ -50,9 +50,8 @@ class HomeFragment : Fragment() {
 
         fun deleteGoal (goal: Goal){
             val builder = AlertDialog.Builder(requireContext())
-            builder.setPositiveButton("Yes"){_,_, ->
+            builder.setPositiveButton("Yes"){_,_ ->
                 vm.deleteGoal(goal)
-                vm.habitList.value?.let { recyclerView.adapter?.notifyItemRemoved(it.indexOf(goal)) }
                 Toast.makeText(requireContext(), "Your ${goal.name} goal with all the progress was deleted", Toast.LENGTH_SHORT).show()
             }
             builder.setNegativeButton("No"){ _, _ ->
@@ -69,8 +68,8 @@ class HomeFragment : Fragment() {
                 if (position != RecyclerView.NO_POSITION) {
                     vm.habitList.value?.get(position)?.let {
                         deleteGoal(it)
+                        adapter.notifyItemChanged(position)
                     }
-                    recyclerView.adapter?.notifyItemRemoved(position)
                 }
             }
         }
