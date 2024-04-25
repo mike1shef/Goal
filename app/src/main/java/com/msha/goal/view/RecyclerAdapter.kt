@@ -42,7 +42,7 @@ class RecyclerAdapter(val onClick : (goal : Goal) -> Unit)
         if (item.isCompleted){
             holder.itemView.setBackgroundColor(ContextCompat.getColor(
                 holder.itemView.context,
-                R.color.light_blue_A400
+                R.color.md_theme_dark_secondary
             ))
         }
     }

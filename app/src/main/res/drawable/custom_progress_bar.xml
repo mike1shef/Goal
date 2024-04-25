@@ -4,9 +4,8 @@
     <item android:id="@android:id/background">
         <shape
             android:shape="rectangle">
-            <corners android:radius="8dp"/>
-            <solid android:color="#FFFFFF"/>
-
+            <corners android:radius="24dp"/>
+            <solid  android:color="@color/md_theme_dark_onSecondaryContainer"/>
 
         </shape>
 
@@ -17,8 +16,8 @@
         <scale android:scaleWidth="100%">
             <shape
                 android:shape="rectangle">
-                <corners android:radius="8dp"/>
-                <solid android:color="#8BC34A"/>
+                <corners android:radius="24dp"/>
+                <solid android:color="@color/seed"/>
             </shape>
         </scale>
 

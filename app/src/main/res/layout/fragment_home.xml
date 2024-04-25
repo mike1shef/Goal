@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp"
+    style="@style/Base.Theme.Goal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:clipChildren="false"
     android:clipToPadding="false"
     tools:context=".view.HomeFragment">
@@ -21,11 +23,12 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_goal"
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="New goal"
+        app:iconSize="24dp"
         app:icon="@drawable/floating_add"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />
 
