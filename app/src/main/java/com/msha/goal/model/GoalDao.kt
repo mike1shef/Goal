@@ -1,5 +1,6 @@
 package com.msha.goal.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -51,7 +52,7 @@ suspend fun deleteGoalWithMeasurements(goal: Goal) {
         insertMeasurement(measurement)
     }
 
-    @Query("SELECT * FROM measurements WHERE gid = :gid")
+    @Query("SELECT * FROM measurements WHERE gid = :gid ORDER BY measurementDate DESC")
     suspend fun getExactMeasurements(gid : Long) : List<Measurement>
 
     @Query("DELETE FROM goals")
