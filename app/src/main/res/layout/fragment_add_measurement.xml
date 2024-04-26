@@ -163,6 +163,7 @@
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:suffixText="km"
+            android:inputType="numberDecimal"
             tools:ignore="KeyboardInaccessibleWidget" />
 
     </com.google.android.material.textfield.TextInputLayout>
