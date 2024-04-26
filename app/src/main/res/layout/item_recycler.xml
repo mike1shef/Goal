@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Widget.Material3.CardView.Elevated"
-    android:elevation="16dp"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="16dp"
+    style="@style/Base.Theme.Goal"
+    android:elevation="8dp"
+    app:cardCornerRadius="24dp"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
     android:clickable="true"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Base.Theme.Goal"
         android:padding="24dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_weight="0.1"
+            android:orientation="horizontal"
+            android:layout_marginBottom="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
         <TextView
             android:id="@+id/recycler_view_item_text"
             style="@style/TextAppearance.Material3.TitleLarge"
+            android:text="New goal"
             android:layout_width="wrap_content"
-            android:layout_marginBottom="28dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
             />
+            <ImageView
+                android:id="@+id/image_on_card"
+                android:src="@drawable/outline_done_24"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/recycler_view_item_progress_bar"

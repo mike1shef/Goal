@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
         val adapter = RecyclerAdapter {
             vm.selectHabit(it)
             findNavController().navigate(R.id.action_homeFragment_to_habitDetailsFragment)
+            (activity as MainActivity).supportActionBar?.title = vm.selectedHabit.value?.name
         }
 
         binding.recyclerView.adapter = adapter

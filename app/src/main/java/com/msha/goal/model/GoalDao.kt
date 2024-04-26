@@ -1,5 +1,6 @@
 package com.msha.goal.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -21,8 +22,8 @@ interface GoalDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMeasurement (measurement: Measurement)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update (goal: Goal)
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun update (goal: Goal)
 
     @Delete
     suspend fun deleteGoal(goal: Goal)
@@ -51,7 +52,7 @@ suspend fun deleteGoalWithMeasurements(goal: Goal) {
         insertMeasurement(measurement)
     }
 
-    @Query("SELECT * FROM measurements WHERE gid = :gid")
+    @Query("SELECT * FROM measurements WHERE gid = :gid ORDER BY measurementDate DESC")
     suspend fun getExactMeasurements(gid : Long) : List<Measurement>
 
     @Query("DELETE FROM goals")

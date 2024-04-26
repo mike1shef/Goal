@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
+    style="@style/Base.Theme.Goal"
+    android:layout_marginTop="56dp"
     tools:context=".view.AddMeasurementFragment">
 
     <com.google.android.material.button.MaterialButton
@@ -12,18 +14,19 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
         android:text="Save"
-        android:textColor="@color/material_dynamic_primary0"
         app:layout_constraintBottom_toBottomOf="@+id/close_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/close_button" />
 
     <ImageButton
         android:id="@+id/close_button"
-        style="@style/Widget.Material3.Button.Icon"
+        style="@style/Base.Theme.Goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
+        android:layout_marginHorizontal="8dp"
         android:src="@drawable/close"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +34,6 @@
     <TextView
         android:id="@+id/title"
         style="@style/TextAppearance.Material3.HeadlineLarge"
-        android:textColor="@color/material_dynamic_primary0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
@@ -60,7 +62,6 @@
         android:layout_marginVertical="18dp"
         android:layout_margin="12dp"
         android:text="Goal"
-        android:textColor="@color/material_dynamic_primary0"
         app:layout_constraintBottom_toTopOf="@id/divider2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
@@ -72,8 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingVertical="8dp"
+        android:paddingEnd="8dp"
         android:text="Cycling"
-        android:textColor="@color/material_dynamic_primary0"
         app:layout_constraintBottom_toBottomOf="@+id/current_goal_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
@@ -96,7 +97,6 @@
         android:layout_margin="12dp"
         android:paddingVertical="8dp"
         android:text="Date"
-        android:textColor="@color/material_dynamic_primary0"
         app:layout_constraintBottom_toTopOf="@id/divider3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider2" />
@@ -108,7 +108,6 @@
         android:layout_height="wrap_content"
         android:paddingVertical="8dp"
         android:text="Today"
-        android:textColor="@color/material_dynamic_primary0"
         app:layout_constraintBottom_toBottomOf="@+id/current_date_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
@@ -133,7 +132,6 @@
         android:layout_margin="12dp"
         android:paddingVertical="8dp"
         android:text="Distance"
-        android:textColor="@color/material_dynamic_primary0"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3"
@@ -147,7 +145,6 @@
         android:layout_marginBottom="12dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:textColor="@color/material_dynamic_primary0"
         app:boxBackgroundMode="none"
         app:hintEnabled="false"
         app:hintTextAppearance="@style/TextAppearance.Material3.LabelSmall"
@@ -165,8 +162,8 @@
             android:maxLines="1"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/material_dynamic_primary0"
             app:suffixText="km"
+            android:inputType="numberDecimal"
             tools:ignore="KeyboardInaccessibleWidget" />
 
     </com.google.android.material.textfield.TextInputLayout>

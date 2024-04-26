@@ -6,14 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.msha.goal.R
 import com.msha.goal.databinding.FragmentAddMeasurementBinding
 import com.msha.goal.viewmodel.MainViewModel
 import java.time.LocalDate
@@ -99,7 +99,7 @@ class AddMeasurementFragment : Fragment() {
         }
 
         closeButton.setOnClickListener {
-            findNavController().navigate(R.id.habitDetailsFragment)
+            binding.root.findNavController().popBackStack()
         }
 
         saveButton.setOnClickListener {
@@ -107,11 +107,27 @@ class AddMeasurementFragment : Fragment() {
 
             if (progress != null) {
                 vm.addProgress(progress,providedDate)
+                binding.root.findNavController().popBackStack()
                 Toast.makeText(context, "Measurement added", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "Enter progress", Toast.LENGTH_SHORT).show()
             }
-            findNavController().navigate(R.id.habitDetailsFragment)
+        }
+
+        binding.editText.setOnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    val progress = measurementText?.text.toString().toDoubleOrNull()
+
+                    if (progress != null) {
+                        vm.addProgress(progress,providedDate)
+                        binding.root.findNavController().popBackStack()
+                        Toast.makeText(context, "Measurement added", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "Enter progress", Toast.LENGTH_SHORT).show()
+                    }
+                    return@setOnEditorActionListener true
+                }
+            false
         }
 
         return binding.root

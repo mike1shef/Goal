@@ -11,6 +11,7 @@ import com.msha.goal.model.Measurement
 import com.msha.goal.repository.GoalRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainViewModel (private val repository: GoalRepository) : ViewModel() {
 
@@ -18,6 +19,13 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
 
     private val mutableSelectedHabit : MutableLiveData<Goal>  =  MutableLiveData<Goal>()
     val selectedHabit : MutableLiveData<Goal> get() = mutableSelectedHabit
+    fun getMeasurements() : List<Measurement>{
+        return runBlocking {
+            repository.getExactMeasurements(selectedHabit.value!!)
+        }
+    }
+
+
 
     fun selectHabit (goal: Goal){
         mutableSelectedHabit.value = goal
@@ -44,10 +52,17 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         selectedHabit.value = goal
     }
 
-    fun getMeasurements (){
-        viewModelScope.launch {
-            repository.getExactMeasurements(selectedHabit.value!!)
+    fun addTarget (target: Double) {
+        val goal = habitList.value?.find { it == selectedHabit.value }!!
+        goal.target += target
+
+        if (goal.progress < goal.target) {
+            goal.isCompleted = false
         }
+        viewModelScope.launch {
+            repository.updateGoal(goal)
+        }
+        selectedHabit.value = goal
     }
 
     fun deleteGoal (goal: Goal){

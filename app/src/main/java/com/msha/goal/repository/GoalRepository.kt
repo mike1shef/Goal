@@ -1,6 +1,7 @@
 package com.msha.goal.repository
 
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.msha.goal.model.Goal
 import com.msha.goal.model.GoalDao
 import com.msha.goal.model.Measurement
@@ -26,8 +27,8 @@ class GoalRepository (private val goalDao: GoalDao) {
     }
 
     @WorkerThread
-    suspend fun getExactMeasurements (goal: Goal){
-        goalDao.getExactMeasurements(goal.gid)
+    suspend fun getExactMeasurements (goal: Goal) : List<Measurement>{
+        return goalDao.getExactMeasurements(goal.gid)
     }
 
 
@@ -35,4 +36,8 @@ class GoalRepository (private val goalDao: GoalDao) {
         goalDao.deleteGoalWithMeasurements(goal)
     }
 
+    suspend fun updateGoal(goal: Goal) {
+        goalDao.update(goal)
+
+    }
 }
