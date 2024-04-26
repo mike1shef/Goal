@@ -22,8 +22,8 @@ interface GoalDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMeasurement (measurement: Measurement)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update (goal: Goal)
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun update (goal: Goal)
 
     @Delete
     suspend fun deleteGoal(goal: Goal)

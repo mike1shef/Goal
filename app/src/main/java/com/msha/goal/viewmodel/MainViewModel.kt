@@ -52,6 +52,19 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         selectedHabit.value = goal
     }
 
+    fun addTarget (target: Double) {
+        val goal = habitList.value?.find { it == selectedHabit.value }!!
+        goal.target += target
+
+        if (goal.progress < goal.target) {
+            goal.isCompleted = false
+        }
+        viewModelScope.launch {
+            repository.updateGoal(goal)
+        }
+        selectedHabit.value = goal
+    }
+
     fun deleteGoal (goal: Goal){
         if (goal == mutableSelectedHabit.value){
             mutableSelectedHabit.value = Goal(name = "", target = 0.0)

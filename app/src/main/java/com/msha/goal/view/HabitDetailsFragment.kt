@@ -47,9 +47,28 @@ class HabitDetailsFragment : Fragment() {
 
             if (currentGoal.isCompleted){
                 binding.addMeasurement.hide()
+
+                val dialog = MaterialAlertDialogBuilder(requireContext())
+                    .setIcon(R.drawable.outline_done_24)
+                    .setTitle("You've reached your goal!")
+                    .setCancelable(true)
+                    .setNegativeButton("Add goal"){ dialog, position ->
+                        requireActivity().supportFragmentManager.popBackStack()
+                        findNavController().navigate(R.id.addGoalFragment)
+                    }
+                    .setPositiveButton("Add target"){dialog, position ->
+                        vm.addTarget(100.0)
+
+                    }
+                    .setMessage("Select what to do next? Add a value to your current target or create a new goal")
+
+                dialog.create().show()
+
+
+
             }
 
-            if (vm.getMeasurements().isNullOrEmpty()) {
+            if (vm.getMeasurements().isEmpty()) {
                 binding.moreButton.visibility = View.GONE
             } else {
                 binding.moreButton.visibility = View.VISIBLE
@@ -57,7 +76,9 @@ class HabitDetailsFragment : Fragment() {
         })
 
         binding.addMeasurement.setOnClickListener {
+
             findNavController().navigate(R.id.addMeasurementFragment)
+
         }
 
         binding.moreButton.setOnClickListener {
