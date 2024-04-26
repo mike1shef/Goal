@@ -3,9 +3,9 @@ package com.msha.goal.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -39,18 +39,14 @@ class RecyclerAdapter(val onClick : (goal : Goal) -> Unit)
 
             this.progress = item.progress.toInt()
         }
-        if (item.isCompleted){
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(
-                holder.itemView.context,
-                R.color.md_theme_dark_secondary
-            ))
-        }
+
+        holder.imageComplete.visibility = if (item.isCompleted) View.VISIBLE else View.GONE
     }
 
     class GoalViewHolder (view: View) : RecyclerView.ViewHolder(view){
         val text: TextView = view.findViewById(R.id.recycler_view_item_text)
         val progressBar: ProgressBar = view.findViewById(R.id.recycler_view_item_progress_bar)
-
+        val imageComplete : ImageView = view.findViewById(R.id.image_on_card)
     }
 }
 class GoalDiffUtilCallback : DiffUtil.ItemCallback<Goal>(){
