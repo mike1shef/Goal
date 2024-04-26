@@ -14,12 +14,12 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        style="@style/Widget.Material3.Toolbar.Surface"
+        android:layout_marginTop="18dp"
+        style="@style/Widget.Material3.CollapsingToolbar.Medium"
         android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+        app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineLarge" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
