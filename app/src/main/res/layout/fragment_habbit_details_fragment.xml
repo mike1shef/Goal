@@ -15,60 +15,47 @@
         style="@style/CircularDeterminateProgressBar"
         android:layout_width="270dp"
         android:layout_height="270dp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dp"
         android:indeterminateOnly="false"
         android:progressDrawable="@drawable/custom_circle_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/current_goal_text"
+        style="@style/TextAppearance.Material3.TitleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="100.00 of 200.00"
         android:clickable="true"
-        android:textSize="23sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
         app:layout_constraintStart_toStartOf="@id/progress_bar"
         app:layout_constraintTop_toTopOf="@+id/progress_bar"
         app:layout_constraintVertical_bias="0.5" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        style="@style/Base.Theme.Goal"
+    <Button
+        android:id="@+id/more_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_measurement"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="0.0"
+        android:backgroundTint="@color/md_theme_light_tertiaryContainer"
+        android:clickable="true"
+        android:text="more"
+        android:textColor="@color/md_theme_light_onBackground"
         app:layout_constraintStart_toStartOf="@id/progress_bar"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/more_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?actionBarItemBackground"
-            android:text="more" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/details_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toTopOf="@id/add_measurement"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="8dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/details_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_measurement"
+        app:layout_constraintTop_toBottomOf="@+id/more_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_measurement"
