@@ -8,7 +8,7 @@ import kotlin.concurrent.Volatile
 
 @Database(
     entities = [Goal::class, Measurement::class],
-    version = 1
+    version = 3
         )
 
 abstract class GoalDatabase : RoomDatabase() {
@@ -22,7 +22,8 @@ abstract class GoalDatabase : RoomDatabase() {
                     context = context.applicationContext,
                     GoalDatabase::class.java,
                     "goal_db"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

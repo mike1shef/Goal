@@ -3,6 +3,7 @@ package com.msha.goal.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 
 @Entity("goals")
 data class Goal (
@@ -16,6 +17,12 @@ data class Goal (
     var target: Double,
     @ColumnInfo("goal_isCompleted")
     var isCompleted : Boolean = false,
+    @ColumnInfo("goal_start_date")
+    var startDate : Long = LocalDate.now().toEpochDay(),
+    @ColumnInfo("goal_duration")
+    var goalDuration : Int = 0,
+    @ColumnInfo("goal_end")
+    var goalEndDate : Long? = null,
 )
 
 

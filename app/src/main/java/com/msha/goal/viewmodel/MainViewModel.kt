@@ -12,6 +12,7 @@ import com.msha.goal.repository.GoalRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.time.LocalDate
 
 class MainViewModel (private val repository: GoalRepository) : ViewModel() {
 
@@ -31,9 +32,14 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         mutableSelectedHabit.value = goal
     }
 
-    fun addHabit(name : String, target: Double){
+
+
+    fun addHabit(name : String, target: Double, duration : Int){
+        val goalEndDate = calculateEndDate(duration)
+        val newGoal = Goal(name = name, target = target, goalDuration = duration, goalEndDate = goalEndDate)
+
         viewModelScope.launch {
-            repository.insertGoal(Goal(name = name, target = target))
+            repository.insertGoal(newGoal)
         }
     }
     fun addProgress (progress: Double, date: Long) {
@@ -43,6 +49,7 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         if (goal.progress >= goal.target) {
             goal.isCompleted = true
         }
+
 
         viewModelScope.launch {
             val measurement = Measurement(gid = goal.gid, progress = progress, date = date)
@@ -73,6 +80,20 @@ class MainViewModel (private val repository: GoalRepository) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
             repository.deleteGoal(goal)
         }
+    }
+
+    val pickerVals = arrayOf("no end date", "1 month", "3 months", " 6 months", "year")
+
+    private fun calculateEndDate (duration: Int) : Long? {
+        var endDate : Long? = null
+        when (duration){
+            1 -> endDate = LocalDate.now().plusMonths(1).toEpochDay()
+            3 -> endDate = LocalDate.now().plusMonths(3).toEpochDay()
+            6 -> endDate = LocalDate.now().plusMonths(6).toEpochDay()
+            12 -> endDate = LocalDate.now().plusMonths(12).toEpochDay()
+            else -> {}
+        }
+        return endDate
     }
 }
 
