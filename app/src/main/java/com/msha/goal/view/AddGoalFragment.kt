@@ -22,9 +22,15 @@ class AddGoalFragment : BottomSheetDialogFragment() {
     ): View {
         _binding = FragmentAddGoalBinding.inflate(inflater,container, false)
         val goalNameText = binding.editGoalName.editText
-        val goalNumberText = binding.editTargetValue.editText
+        val goalNumberText = binding.editTarget.editText
         val saveButton = binding.saveButton.apply {
             this.isEnabled = false
+        }
+
+        binding.durationPicker.apply {
+            this.maxValue = 4
+            this.minValue = 0
+            displayedValues = vm.pickerVals
         }
 
         goalNameText?.doOnTextChanged { _, _, _, _ ->
@@ -35,13 +41,13 @@ class AddGoalFragment : BottomSheetDialogFragment() {
             saveButton.isEnabled = validateInput(goalNameText, goalNumberText)
         }
 
-
         binding.saveButton.setOnClickListener {
             val text= goalNameText?.text?.toString()
             val target = goalNumberText?.text.toString().toDoubleOrNull()
+            val duration = binding.durationPicker.value
 
             if (target != null){
-                vm.addHabit(text!!,target)
+                vm.addHabit(text!!,target, duration)
             } else {
                 Toast.makeText(context, "Enter target", Toast.LENGTH_SHORT).show()
             }
