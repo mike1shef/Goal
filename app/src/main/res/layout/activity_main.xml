@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:padding="8dp"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:layout_width="match_parent"
@@ -14,7 +13,7 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="32dp"
         style="@style/Widget.Material3.CollapsingToolbar.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
