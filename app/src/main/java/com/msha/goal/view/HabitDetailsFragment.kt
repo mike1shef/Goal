@@ -46,7 +46,10 @@ class HabitDetailsFragment : Fragment() {
             }
 
             if (currentGoal.isCompleted){
-                binding.addMeasurement.hide()
+
+                binding.addMeasurement.setOnClickListener {
+                    vm.addTarget(10.0)
+                }
 
                 val dialog = MaterialAlertDialogBuilder(requireContext())
                     .setIcon(R.drawable.outline_done_24)
@@ -67,30 +70,33 @@ class HabitDetailsFragment : Fragment() {
 
 
             }
-
-            if (vm.getMeasurements().isEmpty()) {
-                binding.moreButton.visibility = View.GONE
-            } else {
-                binding.moreButton.visibility = View.VISIBLE
-            }
         })
 
         binding.addMeasurement.setOnClickListener {
-
             findNavController().navigate(R.id.addMeasurementFragment)
-
         }
 
-        binding.moreButton.setOnClickListener {
-            val listOfMeasurements = vm.getMeasurements()
-            adapter.submitList(listOfMeasurements)
+        binding.bottomAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.back_action -> {
+                    findNavController().popBackStack()
 
-            if (binding.moreButton.text == "more"){
-                binding.detailsRecycler.visibility = View.VISIBLE
-                binding.moreButton.text = "less"
-            } else {
-                binding.detailsRecycler.visibility = View.GONE
-                binding.moreButton.text = "more"
+                    true
+                }
+
+                R.id.share_progress -> {
+
+                    true
+                }
+
+                R.id.view_measurements -> {
+                    val listOfMeasurements = vm.getMeasurements()
+                    adapter.submitList(listOfMeasurements)
+
+                    true
+                }
+
+                else -> false
             }
         }
 
