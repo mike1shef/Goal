@@ -1,72 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="8dp"
-    android:clipChildren="false"
-    android:clipToPadding="false"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.HabitDetailsFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="@style/CircularDeterminateProgressBar"
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="12dp"
-        android:indeterminateOnly="false"
-        android:progressDrawable="@drawable/custom_circle_progress_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/current_goal_text"
-        style="@style/TextAppearance.Material3.TitleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100.00 of 200.00"
-        android:clickable="true"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-        app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-        app:layout_constraintStart_toStartOf="@id/progress_bar"
-        app:layout_constraintTop_toTopOf="@+id/progress_bar"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <Button
-        android:id="@+id/more_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/md_theme_light_tertiaryContainer"
-        android:clickable="true"
-        android:text="more"
-        android:textColor="@color/md_theme_light_onBackground"
-        app:layout_constraintStart_toStartOf="@id/progress_bar"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/details_recycler"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_measurement"
-        app:layout_constraintTop_toBottomOf="@+id/more_button"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="653dp"
+        android:orientation="vertical"
+        app:layout_anchorGravity="top">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="@style/CircularDeterminateProgressBar"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_gravity="top|center_horizontal"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/custom_circle_progress_bar" />
+
+            <TextView
+                android:id="@+id/current_goal_text"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:text="100.00 of 200.00"
+                android:textSize="21sp" />
+
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/details_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9" />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.Material3.BottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_bar_menu"
+        android:layout_gravity="bottom"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_measurement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:iconSize="24dp"
+        android:src="@drawable/floating_add"
         android:text="Track progress"
-        app:icon="@drawable/floating_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_anchor="@id/bottomAppBar"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
