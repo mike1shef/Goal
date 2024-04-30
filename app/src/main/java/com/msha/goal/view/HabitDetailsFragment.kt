@@ -13,6 +13,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.msha.goal.R
 import com.msha.goal.viewmodel.MainViewModel
 import com.msha.goal.databinding.FragmentHabbitDetailsFragmentBinding
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.Locale
 
 class HabitDetailsFragment : Fragment() {
@@ -41,12 +43,20 @@ class HabitDetailsFragment : Fragment() {
             binding.progressBar.progress = currentGoal.progress.toInt()
             binding.progressBar.max = currentGoal.target.toInt()
 
+            if (currentGoal.goalEndDate != null) {
+                binding.endCard.visibility = View.VISIBLE
+                val endDate = LocalDate.ofEpochDay(currentGoal.goalEndDate!!)
+                binding.cardDaysLeftValue.text = ChronoUnit.DAYS.between(LocalDate.now(), endDate).toString()
+                }
+
             binding.currentGoalText.setOnClickListener {
                 binding.currentGoalText.text = changeView(currentGoal.progress, currentGoal.target)
             }
 
             if (currentGoal.isCompleted){
-                binding.addMeasurement.hide()
+                binding.addMeasurement.setOnClickListener {
+                    vm.addTarget(10.0)
+                }
 
                 val dialog = MaterialAlertDialogBuilder(requireContext())
                     .setIcon(R.drawable.outline_done_24)
@@ -67,30 +77,33 @@ class HabitDetailsFragment : Fragment() {
 
 
             }
-
-            if (vm.getMeasurements().isEmpty()) {
-                binding.moreButton.visibility = View.GONE
-            } else {
-                binding.moreButton.visibility = View.VISIBLE
-            }
         })
 
         binding.addMeasurement.setOnClickListener {
-
             findNavController().navigate(R.id.addMeasurementFragment)
-
         }
 
-        binding.moreButton.setOnClickListener {
-            val listOfMeasurements = vm.getMeasurements()
-            adapter.submitList(listOfMeasurements)
+        binding.bottomAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.back_action -> {
+                    findNavController().popBackStack()
 
-            if (binding.moreButton.text == "more"){
-                binding.detailsRecycler.visibility = View.VISIBLE
-                binding.moreButton.text = "less"
-            } else {
-                binding.detailsRecycler.visibility = View.GONE
-                binding.moreButton.text = "more"
+                    true
+                }
+
+                R.id.share_progress -> {
+
+                    true
+                }
+
+                R.id.view_measurements -> {
+                    val listOfMeasurements = vm.getMeasurements()
+                    adapter.submitList(listOfMeasurements)
+
+                    true
+                }
+
+                else -> false
             }
         }
 
@@ -106,6 +119,7 @@ class HabitDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.endCard.visibility = View.GONE
         binding.progressBar.progress = 0
         _binding = null
     }

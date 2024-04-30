@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/back_action"
+        android:icon="@drawable/outline_arrow_back_24"
+        android:title="Return back"
+        android:contentDescription="Return back"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/share_progress"
+        android:icon="@drawable/outline_share_24"
+        android:title="Share progress"
+        android:contentDescription="Share progress"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/view_measurements"
+        android:icon="@drawable/outline_lists_24"
+        android:title="Measurements"
+        android:contentDescription="Show measurements to user"
+        app:showAsAction="ifRoom"/>
+
+</menu>
