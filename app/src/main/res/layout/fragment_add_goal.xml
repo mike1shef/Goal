@@ -11,14 +11,12 @@
     <TextView
         android:id="@+id/add_goal_title"
         style="@style/MaterialAlertDialog.Material3.Title.Text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal = "12dp"
-        android:layout_marginTop = "24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="New goal" />
+        android:text="New goal"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
@@ -34,38 +32,34 @@
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_marginBottom="21dp"
         android:text="Goal"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_goal_name"
-        android:layout_marginBottom="12dp"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         app:boxBackgroundMode="none"
         app:hintEnabled="false"
         app:hintTextAppearance="@style/TextAppearance.Material3.LabelSmall"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/current_goal_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@id/divider">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:boxBackgroundMode="none"
-            android:textAlignment="textEnd"
             android:hint="Add name"
             android:inputType="text"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:boxBackgroundMode="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -81,38 +75,34 @@
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_marginBottom="21dp"
         android:text="Target"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toBottomOf="@id/divider2" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_target"
-        android:layout_marginBottom="12dp"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         app:boxBackgroundMode="none"
         app:hintEnabled="false"
         app:hintTextAppearance="@style/TextAppearance.Material3.LabelSmall"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/current_target_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@id/divider2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:boxBackgroundMode="none"
             android:hint="Add target"
-            android:textAlignment="textEnd"
             android:inputType="numberDecimal"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:boxBackgroundMode="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -129,34 +119,60 @@
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_marginBottom="21dp"
         android:text="Duration"
         app:layout_constraintBottom_toTopOf="@+id/save_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider3"/>
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/divider3" />
 
     <NumberPicker
         android:id="@+id/duration_picker"
         style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/save_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/duration_text"
-        app:layout_constraintTop_toBottomOf="@+id/divider3"/>
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
     <Button
         android:id="@+id/save_button"
         style="@style/Widget.Material3.Button.ElevatedButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_gravity="center_horizontal"
-        android:text="Start achieving" />
+        android:layout_marginBottom="24dp"
+        android:text="Start achieving"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="176dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
