@@ -1,5 +1,6 @@
 package com.msha.goal.view
 
+import android.animation.ValueAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,19 +27,28 @@ class RecyclerAdapter(val onClick : (goal : Goal) -> Unit)
                 onClick(item)
             }
         }
-
         return holder
     }
 
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
         val item = getItem(position)
+
         holder.text.text = item.name
         holder.progressBar.apply {
             this.max = item.target.toInt()
             this.min = 0
-
             this.progress = item.progress.toInt()
         }
+
+        val animator = ValueAnimator.ofInt(0, item.progress.toInt()).apply {
+            this.duration = 350
+            interpolator = android.view.animation.LinearInterpolator()
+        }
+        animator.addUpdateListener {animation ->
+            holder.progressBar.progress = animation.animatedValue as Int
+        }
+        animator.start()
+
 
         holder.imageComplete.visibility = if (item.isCompleted) View.VISIBLE else View.GONE
     }

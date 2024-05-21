@@ -1,5 +1,6 @@
 package com.msha.goal.view
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +40,10 @@ class HabitDetailsFragment : Fragment() {
 
         vm.selectedHabit.observe(viewLifecycleOwner, Observer {currentGoal ->
             val template = String.format(Locale.getDefault(),"%.1f of %.1f", currentGoal.progress, currentGoal.target)
+
+            animateProgressBar(currentGoal.progress)
+
             binding.currentGoalText.text = template
-            binding.progressBar.progress = currentGoal.progress.toInt()
             binding.progressBar.max = currentGoal.target.toInt()
 
             if (currentGoal.goalEndDate != null) {
@@ -73,8 +76,6 @@ class HabitDetailsFragment : Fragment() {
                     .setMessage("Select what to do next? Add a value to your current target or create a new goal")
 
                 dialog.create().show()
-
-
 
             }
         })
@@ -110,6 +111,17 @@ class HabitDetailsFragment : Fragment() {
         return binding.root
     }
 
+    private fun animateProgressBar(progress: Double,) {
+        val animator = ValueAnimator.ofInt(0, progress.toInt()).apply {
+            this.duration = 300
+            interpolator = android.view.animation.LinearInterpolator()
+        }
+        animator.addUpdateListener {animation ->
+            binding.progressBar.progress = animation.animatedValue as Int
+        }
+        animator.start()
+    }
+
 
     private fun changeView (progress: Double, target:Double) : String {
         isPercentageView = !isPercentageView
@@ -119,7 +131,6 @@ class HabitDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.endCard.visibility = View.GONE
         binding.progressBar.progress = 0
         _binding = null
     }
